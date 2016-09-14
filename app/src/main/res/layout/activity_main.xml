@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/drawerlayout"
+              tools:context="com.wanglipeng.a32014.smallshopping.MainActivity"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
+
+    <RelativeLayout
+        android:id="@+id/contanter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView"/>
+            <GridView
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:numColumns="3"
+                android:layout_height="wrap_content"
+                android:id="@+id/gridView"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/navigation"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left">
+
+        <ScrollView
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="clickCircle"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/img13"/>
+        <TextView
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未登录"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/circle"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"/>
+        <ListView
+            android:id="@+id/menu_listview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/register"
+            android:layout_marginTop="50dp"></ListView>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
