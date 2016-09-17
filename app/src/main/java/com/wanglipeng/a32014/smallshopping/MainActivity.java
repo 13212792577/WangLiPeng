@@ -2,18 +2,28 @@ package com.wanglipeng.a32014.smallshopping;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.BoringLayout;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.wanglipeng.a32014.smallshopping.adapter.DressAllAdapter;
 import com.wanglipeng.a32014.smallshopping.adapter.DressSingleAdapter;
@@ -43,7 +53,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListView.OnItemClickListener{
 
     ListView listView,menuList;
     GridView gridView;
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     List<DressSingle> dressSingle_list;
     DressAllAdapter adapter;
     DressSingleAdapter singleAdapter;
+    MenuAdapter menuAdapter;
     String name = "dressAll";  //目录名
     File file;
 
@@ -73,9 +84,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.app_name,R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+        //状态栏的颜色和菜单栏一样
+        if(Build.VERSION.SDK_INT>=21){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
+        }
 
-        MenuAdapter menuAdapter = new MenuAdapter(this);
+        menuAdapter = new MenuAdapter(this);
         menuList.setAdapter(menuAdapter);
+        menuList.setOnItemClickListener(this);
         file = InitFile.initFile(name);
 
         getResource();
@@ -225,7 +241,68 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //
-    public void clickCircle(){
+    //图片的点击 事件 更换头像
+    public void clickCircle(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.item_dialog01,null);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int width = metrics.widthPixels;
+
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
+        lp.gravity = Gravity.BOTTOM;
+        lp.width = width;
+        window.setAttributes(lp);
+        window.setBackgroundDrawableResource(R.color.colorPrimary);
+        window.setWindowAnimations(R.style.WindowDialogAnimation);
+//        对话框的点击事件
+//        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                startActivityForResult(intent,100);
+//            }
+//        });
+//        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW);
+//            }
+//        });
+//        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+    }
+
+    //drawLayout  listView 的点击选择事件
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        menuAdapter.setPos(position);
+        menuAdapter.notifyDataSetChanged();
+        switch(position){
+            case 0:
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                startActivity(new Intent(this,MainActivity.class));
+                break;
+            case 1:
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                startActivity(new Intent(this,CollectActivity.class));
+                break;
+            case 2:
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                startActivity(new Intent(this,ShopCarActivity.class));
+                break;
+            case 3:
+                Toast.makeText(MainActivity.this, "退出成功", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

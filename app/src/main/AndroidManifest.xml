@@ -24,7 +24,13 @@
         <activity
             android:name=".Main2Activity"
             android:launchMode="singleTask" />
-        <activity android:name=".Main3Activity" android:launchMode="singleTask" />
+        <activity
+            android:name=".Main3Activity"
+            android:launchMode="singleTask" />
+        <activity android:name=".CollectActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ShopCarActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.wanglipeng.a32014.smallshopping.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +56,9 @@ public class DressAdapter extends BaseAdapter{
 
         viewHolder2.textView1.setText(list.get(position).getDescription());
         viewHolder2.textView2.setText("销售："+list.get(position).getSales());
-        viewHolder2.textView3.setText("$"+list.get(position).getPrice());
-        viewHolder2.textView4.setText("原$"+list.get(position).getOrigin_price());
+        viewHolder2.textView3.setText("￥"+list.get(position).getPrice());
+        viewHolder2.textView4.setText("原￥"+list.get(position).getOrigin_price());
+        viewHolder2.textView4.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         String path = list.get(position).getPicUrl();
         Picasso.with(context).load(path).into(viewHolder2.imageView);
         return convertView;

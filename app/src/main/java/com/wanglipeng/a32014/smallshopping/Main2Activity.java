@@ -73,6 +73,9 @@ public class Main2Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
                 intent.putExtra("scorceId",list.get(position).getSourceId());
+                intent.putExtra("description",list.get(position).getDescription());
+                intent.putExtra("picUrl",list.get(position).getPicUrl());
+                intent.putExtra("price",list.get(position).getPrice());
                 startActivity(intent);
             }
         });

@@ -9,10 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wanglipeng.a32014.smallshopping.R;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by wanglipeng on 2016/9/13.
  */
@@ -25,8 +21,13 @@ public class MenuAdapter extends BaseAdapter{
     };
     String[] name = new String[]{"首页","收藏","购物车","退出登录"};
     Context context;
+    int pos = -1;
 
-    public MenuAdapter( Context context) {
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public MenuAdapter(Context context) {
         this.context = context;
     }
 
@@ -54,6 +55,11 @@ public class MenuAdapter extends BaseAdapter{
             convertView.setTag(viewHolderMenu);
         }else{
             viewHolderMenu = (ViewHolderMenu) convertView.getTag();
+        }
+        if(pos==position){
+            convertView.setBackgroundResource(android.R.color.holo_blue_dark);
+        }else{
+            convertView.setBackgroundResource(android.R.color.transparent);
         }
         viewHolderMenu.imageView.setImageResource(img[position]);
         viewHolderMenu.textView.setText(name[position]);
