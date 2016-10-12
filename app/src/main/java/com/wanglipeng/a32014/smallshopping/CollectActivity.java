@@ -18,7 +18,7 @@ public class CollectActivity extends AppCompatActivity {
 
     private void initOptionMenu() {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("收藏");
+        actionBar.setTitle("收藏朱张华");
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
