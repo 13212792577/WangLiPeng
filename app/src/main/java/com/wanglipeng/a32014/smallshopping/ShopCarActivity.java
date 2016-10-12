@@ -50,9 +50,6 @@ public class ShopCarActivity extends AppCompatActivity {
     private void initOptionMenu() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("王立鹏王八蛋");
-        actionBar.setTitle("柯天星王八蛋");
-        actionBar.setTitle("你们都是菜鸡");
-
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
